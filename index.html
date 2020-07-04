@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!--
+                   bbbbbbbb                                                                                       
+ 222222222222222   b::::::b              iiii          tttt                              jjjj                     
+2:::::::::::::::22 b::::::b             i::::i      ttt:::t                             j::::j                    
+2::::::222222:::::2b::::::b              iiii       t:::::t                              jjjj                     
+2222222     2:::::2 b:::::b                         t:::::t                                                       
+            2:::::2 b:::::bbbbbbbbb    iiiiiiittttttt:::::ttttttt                      jjjjjjjppppp   ppppppppp   
+            2:::::2 b::::::::::::::bb  i:::::it:::::::::::::::::t                      j:::::jp::::ppp:::::::::p  
+         2222::::2  b::::::::::::::::b  i::::it:::::::::::::::::t                       j::::jp:::::::::::::::::p 
+    22222::::::22   b:::::bbbbb:::::::b i::::itttttt:::::::tttttt                       j::::jpp::::::ppppp::::::p
+  22::::::::222     b:::::b    b::::::b i::::i      t:::::t                             j::::j p:::::p     p:::::p
+ 2:::::22222        b:::::b     b:::::b i::::i      t:::::t                             j::::j p:::::p     p:::::p
+2:::::2             b:::::b     b:::::b i::::i      t:::::t                             j::::j p:::::p     p:::::p
+2:::::2             b:::::b     b:::::b i::::i      t:::::t    tttttt                   j::::j p:::::p    p::::::p
+2:::::2       222222b:::::bbbbbb::::::bi::::::i     t::::::tttt:::::t                   j::::j p:::::ppppp:::::::p
+2::::::2222222:::::2b::::::::::::::::b i::::::i     tt::::::::::::::t ......            j::::j p::::::::::::::::p 
+2::::::::::::::::::2b:::::::::::::::b  i::::::i       tt:::::::::::tt .::::.            j::::j p::::::::::::::pp  
+22222222222222222222bbbbbbbbbbbbbbbb   iiiiiiii         ttttttttttt   ......            j::::j p::::::pppppppp    
+                                                                                        j::::j p:::::p            
+                                                                              jjjj      j::::j p:::::p            
+                                                                             j::::jj   j:::::jp:::::::p           
+                                                                             j::::::jjj::::::jp:::::::p           
+                                                                              jj::::::::::::j p:::::::p           
+                                                                                jjj::::::jjj  ppppppppp           
+                                                                                   jjjjjj                         -->
+	<meta charset="utf-8">
+	<title>ISHII 2bit unofficial. (NOT Kindness for your eyes...) / 非公式石井通人 (目に優しくない)</title>
+	<meta name="keywords" content="glitch,program,ios,2bit,ishii,omohide breaker">
+	<meta name="description" content="kindness">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="./js/glitch-canvas.min.js"></script>
+	<script src="./index.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var text = "ISHII 2bit unofficial. (NOT Kindness for your eyes...) / 非公式石井通人 (目に優しくない) ... ISHII 2bit: 1900年代後半日本産. 2000年代前半地方国立大学入学. 2000年代前半卒業, 地方国立大学大学院入院. 2000年代前半卒業. 2000年代前半起業, そして上京. 様々なプロジェクトに関わる傍らチョコレートを食べ続ける. 2013年, 満を持して渾身の力を込めたiOSアプリケーション想ひ出ブレイカーをApp Storeにてリリース, そして惨敗. 2014年, 満を持して渾身の力を込めたiOSアプリケーションAnti Taggingをリリース, 想ひ出ブレイカー以上の惨敗を喫して傷心中. 恋がしたい. お金欲しい. 色々爆破したい. 歯をアクリルにしたい. 目からビーム出したい.",
+				cur = 0;
+			setInterval(function() {
+				document.title =  text.substr(cur, 80);
+				cur = (cur + 1) % text.length;
+			}, 120);
+
+			function randomColor(c) {
+				return "#" + (c % 2 ? "f" : "0") + (((c * 0.5) | 0) % 2 ? "f" : "0") + ((c * 0.25) | 0 ? "f" : "0");
+			}
+			$("li,section,h1,h2,h3,p,body").each(function() {
+				var f = (function(that) {
+					return function() {
+						var c = (Math.random() * 8) | 0,
+							bgImage = (Math.random() * 9) | 0;
+							bgImage = (bgImage ? ('url("res/bg' + bgImage + '.png")') : "");
+						that.css({backgroundImage:bgImage, backgroundColor: randomColor(c ), color: randomColor(c + ((Math.random() * 7) | 0)), marginLeft: function(){return Math.random() * 100;}});
+					};
+				})($(this));
+				setTimeout(function() {
+					f();
+					setInterval(f, Math.random() * 1500 + 500);
+				}, Math.random() * 100);
+			});
+			$("li,h1,h2,h3,p,pre").each(function() {
+				$(this).hover(
+					function() {
+						var blur = "blur(" + ((Math.random() * 4) | 0 + 1) + "px)";
+						$(this).css({"-webkit-filter": blur, "filter": blur});
+					},
+					function() {
+						$(this).css({"-webkit-filter": "", "filter": ""});
+					}
+				)
+			});
+			$("pre").each(function() {
+				var f = (function(that) {
+					return function() {
+						var c = (Math.random() * 8) | 0;
+						$(that).css({backgroundColor: randomColor(c), color: randomColor(c + ((Math.random() * 7) | 0)), paddingRight: 10 + Math.random() * 5, paddingLeft: 10 + Math.random() * 5, marginRight: 30 + Math.random() * 20, marginLeft: 30 + Math.random() * 20});
+					};
+				})(this);
+				setInterval(f, Math.random() * 40.0 + 40.0);
+			});
+			$(window).mousemove(function() {
+				$("li,section,h1,h2,h3,p,body").each(function() {
+					var f = (function(that) {
+						return function() {
+							var c = (Math.random() * 8) | 0,
+								bgImage = (Math.random() * 4) | 0;
+								bgImage = bgImage ? ('url("res/bg' + bgImage + '.png")') : "";
+							that.css({backgroundImage:bgImage, backgroundColor: randomColor(c ), color: randomColor(c + ((Math.random() * 7) | 0)), marginLeft: function(){return Math.random() * 100;}});
+						};
+					})($(this));
+					f();
+				});
+			});
+/*			setInterval(function() {
+				var origImage = document.getElementById('origImage');
+				var canvas = document.getElementById('gCanvas');
+				var context = canvas.getContext('2d');
+
+				// draw the image on the canvas
+				context.drawImage(origImage, 0, 0);
+
+				var imageData = context.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
+				var parameters = { amount: 10, seed: (Math.random() * 100) | 0, iterations: 30, quality: 80 };
+
+				glitch(imageData, parameters, function cb(glitchedImageData) {
+				    context.putImageData(glitchedImageData, 0, 0);
+				});
+			}, 200);*/
+		});
+	</script>
+	<style>
+		body {
+			position: relative;
+			background-color: #fff;
+		}
+		::selection {
+		    background:rgba(0, 0, 0, 0); /* Safari */
+			-webkit-filter: blur(2px);
+			filter: blur(2px);
+		}
+/*		#gCanvas   { position: absolute; top: 0; left: 0; width: 99%; height: 99%; z-index: 1; }
+		#origImage { position: absolute; top: 0; left: 0; display: none; }*/
+		canvas { position: fixed; top: 0; left: 0; }
+	</style>
+</head>
+<body>
+<!--	<img id="origImage" src="./img_s.jpg"></img>
+	<canvas id="gCanvas"></canvas>-->
+	<header>
+		<hgroup id="site_logo">
+<pre style="font-family:monospace;">                   bbbbbbbb                                                                                       
+ 222222222222222   b::::::b              iiii          tttt                              jjjj                     
+2:::::::::::::::22 b::::::b             i::::i      ttt:::t                             j::::j                    
+2::::::222222:::::2b::::::b              iiii       t:::::t                              jjjj                     
+2222222     2:::::2 b:::::b                         t:::::t                                                       
+            2:::::2 b:::::bbbbbbbbb    iiiiiiittttttt:::::ttttttt                      jjjjjjjppppp   ppppppppp   
+            2:::::2 b::::::::::::::bb  i:::::it:::::::::::::::::t                      j:::::jp::::ppp:::::::::p  
+         2222::::2  b::::::::::::::::b  i::::it:::::::::::::::::t                       j::::jp:::::::::::::::::p 
+    22222::::::22   b:::::bbbbb:::::::b i::::itttttt:::::::tttttt                       j::::jpp::::::ppppp::::::p
+  22::::::::222     b:::::b    b::::::b i::::i      t:::::t                             j::::j p:::::p     p:::::p
+ 2:::::22222        b:::::b     b:::::b i::::i      t:::::t                             j::::j p:::::p     p:::::p
+2:::::2             b:::::b     b:::::b i::::i      t:::::t                             j::::j p:::::p     p:::::p
+2:::::2             b:::::b     b:::::b i::::i      t:::::t    tttttt                   j::::j p:::::p    p::::::p
+2:::::2       222222b:::::bbbbbb::::::bi::::::i     t::::::tttt:::::t                   j::::j p:::::ppppp:::::::p
+2::::::2222222:::::2b::::::::::::::::b i::::::i     tt::::::::::::::t ......            j::::j p::::::::::::::::p 
+2::::::::::::::::::2b:::::::::::::::b  i::::::i       tt:::::::::::tt .::::.            j::::j p::::::::::::::pp  
+22222222222222222222bbbbbbbbbbbbbbbb   iiiiiiii         ttttttttttt   ......            j::::j p::::::pppppppp    
+                                                                                        j::::j p:::::p            
+                                                                              jjjj      j::::j p:::::p            
+                                                                             j::::jj   j:::::jp:::::::p           
+                                                                             j::::::jjj::::::jp:::::::p           
+                                                                              jj::::::::::::j p:::::::p           
+                                                                                jjj::::::jjj  ppppppppp           
+                                                                                   jjjjjj                         </pre>
+			<h1>2bit.jp / 通人、日本。</h1>
+			<h2>ISHII 2bit unofficial. (NOT Kindness for your eyes...) / 非公式石井通人 (目に優しくない)</h2>
+		</hgroup>
+	</header>
+	<section>
+		<article id="profile" class="contents-article">
+			<header>
+<pre style="font-family:monospace;">                             .-.          ___         
+                            /    \   .-. (   )        
+   .-..  ___ .-.     .--.   | .`. ; ( __) | |  .--.   
+  /    \(   )   \   /    \  | |(___)(''") | | /    \  
+ ' .-,  ;| ' .-. ; |  .-. ; | |_     | |  | ||  .-. ; 
+ | |  . ||  / (___)| |  | |(   __)   | |  | ||  | | | 
+ | |  | || |       | |  | | | |      | |  | ||  |/  | 
+ | |  | || |       | |  | | | |      | |  | ||  ' _.' 
+ | |  ' || |       | '  | | | |      | |  | ||  .'.-. 
+ | `-'  '| |       '  `-' / | |      | |  | |'  `-' / 
+ | \__.'(___)       `.__.' (___)    (___)(___)`.__.'  
+ | |                                                  
+(___)                                                 </pre>
+				<h1>Profile.</h1>
+			</header>
+			<section>
+				<article>
+<pre>:::'###::::'########:::'#######::'##::::'##:'########:
+::'## ##::: ##.... ##:'##.... ##: ##:::: ##:... ##..::
+:'##:. ##:: ##:::: ##: ##:::: ##: ##:::: ##:::: ##::::
+'##:::. ##: ########:: ##:::: ##: ##:::: ##:::: ##::::
+ #########: ##.... ##: ##:::: ##: ##:::: ##:::: ##::::
+ ##.... ##: ##:::: ##: ##:::: ##: ##:::: ##:::: ##::::
+ ##:::: ##: ########::. #######::. #######::::: ##::::
+..:::::..::........::::.......::::.......::::::..:::::</pre>
+					<h2>About.</h2>
+					<section>
+						<p>大きくなったらオープンソースのOSになりたい.</p>
+					</section>
+				</article>
+				<article>
+<pre>d8888b. d888888b  .d88b.   d888b  d8888b.  .d8b.  d8888b. db   db db    db 
+88  `8D   `88'   .8P  Y8. 88' Y8b 88  `8D d8' `8b 88  `8D 88   88 `8b  d8' 
+88oooY'    88    88    88 88      88oobY' 88ooo88 88oodD' 88ooo88  `8bd8'  
+88~~~b.    88    88    88 88  ooo 88`8b   88~~~88 88~~~   88~~~88    88    
+88   8D   .88.   `8b  d8' 88. ~8~ 88 `88. 88   88 88      88   88    88    
+Y8888P' Y888888P  `Y88P'   Y888P  88   YD YP   YP 88      YP   YP    YP    </pre>
+					<h2>Biography.</h2>
+					<section>
+						<ul>
+							<li>1984年 福岡の片田舎に生まれる.</li>
+							<li>2001年 初めてBASICを触る. すぐにC++に手を出すも挫折.</li>
+							<li>2003年 山口大学理学部入学.</li>
+							<li>2003年 伊藤隆之に勝手に弟子入り.</li>
+							<li>2004年 真鍋大度に勝手に弟子入り.</li>
+							<li>2005年 谷竜一と共にパフォーマンス集団『集団:歩行訓練』を立ち上げ.</li>
+							<li>2006年 英語が2単位足りず留年. 二度目の大学3年生を過ごす. 暇なので真面目にプログラムを勉強し始める.</li>
+							<li>2008年 山口大学 理学部卒業.</li>
+							<li>2010年 山口大学大学院 理工学研究科 博士前期課程修了.</li>
+							<li>2010年 鈴木隆志, 小松桂と共に株式会社buffer Renaissを設立. 平社員.</li>
+							<li>2013年現在独身.</li>
+						</ul>
+					</section>
+				</article>
+				<article>
+<pre> _|                                                                        
+ _|    _|_|_|  _|_|_|      _|_|_|  _|    _|    _|_|_|    _|_|_|    _|_|    
+ _|  _|    _|  _|    _|  _|    _|  _|    _|  _|    _|  _|    _|  _|_|_|_|  
+ _|  _|    _|  _|    _|  _|    _|  _|    _|  _|    _|  _|    _|  _|        
+ _|    _|_|_|  _|    _|    _|_|_|    _|_|_|    _|_|_|    _|_|_|    _|_|_|  
+                               _|                            _|            
+                           _|_|                          _|_|              </pre>
+					<h2>Language.</h2>
+					<section>
+						<ul>
+							<li>C/C++/Objective-C</li>
+							<li>JavaScript/PHP</li>
+							<li>Python</li>
+							<li>Max/MSP</li>
+							<li>Japanese</li>
+							<li>etc...</li>
+						</ul>
+					</section>
+				</article>
+			</section>
+		</article>
+		<article id="works" class="contents-article">
+			<header>
+<pre style="font-family:monospace;"> .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
+| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
+| | _____  _____ | || |     ____     | || |  _______     | || |  ___  ____   | || |    _______   | |
+| ||_   _||_   _|| || |   .'    `.   | || | |_   __ \    | || | |_  ||_  _|  | || |   /  ___  |  | |
+| |  | | /\ | |  | || |  /  .--.  \  | || |   | |__) |   | || |   | |_/ /    | || |  |  (__ \_|  | |
+| |  | |/  \| |  | || |  | |    | |  | || |   |  __ /    | || |   |  __'.    | || |   '.___`-.   | |
+| |  |   /\   |  | || |  \  `--'  /  | || |  _| |  \ \_  | || |  _| |  \ \_  | || |  |`\____) |  | |
+| |  |__/  \__|  | || |   `.____.'   | || | |____| |___| | || | |____||____| | || |  |_______.'  | |
+| |              | || |              | || |              | || |              | || |              | |
+| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
+ '----------------'  '----------------'  '----------------'  '----------------'  '----------------' </pre>
+				<h1>Works.</h1>
+			</header>
+			<section>
+				<article>
+<pre> ___ ___  __     __                    ________               __           
+|   |   ||__|.--|  |.-----..-----.    |  |  |  |.-----..----.|  |--..-----.
+|   |   ||  ||  _  ||  -__||  _  |    |  |  |  ||  _  ||   _||    < |__ --|
+ \_____/ |__||_____||_____||_____|    |________||_____||__|  |__|__||_____|</pre>
+					<h2>Video Works.</h2>
+					<section>
+						<article>
+							<h3>TRICERATOPS / I GO WILD, PV</h3>
+							<p>LED Programming</p>
+							<p><a href="https://www.youtube.com/watch?v=916TSlf0oJ8" target="_blank">youtube</a></p>
+						</article>
+						<article>
+							<h3>やくしまるえつこ / ヴィーナスとジーザス, PV</h3>
+							<p>System Programming</p>
+							<p><a href="https://www.youtube.com/watch?v=CKqLuG98bGE" target="_blank">youtube</a></p>
+						</article>
+						<article>
+							<h3>downy / 曦ヲ見ヨ！Fragment remix, PV</h3>
+							<p>LED / Strobe Programming</p>
+							<p><a href="https://www.youtube.com/watch?v=p6kuqlj_5fc" target="_blank">youtube</a></p>
+						</article>
+						<article>
+							<h3>ramza / gala eluard, MV</h3>
+							<p>Direction, Programming</p>
+							<p><a href="https://vimeo.com/92619952" target="_blank">vimeo</a></p>
+						</article>
+					</section>
+				</article>
+				<article>
+<pre>.%%%%%%..%%..%%..%%%%%%...%%%%...%%%%%%..%%%%%%..%%%%%...........%%...%%...%%%%...%%%%%...%%..%%...%%%%..
+...%%....%%..%%..%%......%%..%%....%%....%%......%%..%%..........%%...%%..%%..%%..%%..%%..%%.%%...%%.....
+...%%....%%%%%%..%%%%....%%%%%%....%%....%%%%....%%%%%...........%%.%.%%..%%..%%..%%%%%...%%%%.....%%%%..
+...%%....%%..%%..%%......%%..%%....%%....%%......%%..%%..........%%%%%%%..%%..%%..%%..%%..%%.%%.......%%.
+...%%....%%..%%..%%%%%%..%%..%%....%%....%%%%%%..%%..%%...........%%.%%....%%%%...%%..%%..%%..%%...%%%%..</pre>
+					<h2>Theater Works.</h2>
+					<section>
+						<article>
+							<h3>川口隆夫 / TABLEMIND</h3>
+							<p>Video Programming, Operation</p>
+						</article>
+						<article>
+							<h3>GRINDER-MAN / MIRAGE</h3>
+							<p>Sound Programming, Operation</p>
+						</article>
+						<article>
+							<h3>集団:歩行訓練 / 不変の価値</h3>
+							<p>Sound, Operation and System Programming</p>
+							<p><a href="https://www.youtube.com/watch?v=PbdyuHhN63s" target="_blank">youtube</a></p>
+						</article>
+					</section>
+				</article>
+				<article>
+<pre>    /\\\\       /\\                                /\\        /\\                /\\            
+  /\\    /\\    /\\  /\\                           /\\        /\\                /\\            
+/\\        /\\/\/\ /\/\\        /\\   /\ /\\\      /\\   /\   /\\   /\\   /\ /\\\/\\  /\\ /\\\\ 
+/\\        /\\  /\\  /\ /\    /\   /\\ /\\         /\\  /\\   /\\ /\\  /\\ /\\   /\\ /\\ /\\    
+/\\        /\\  /\\  /\\  /\\/\\\\\ /\\/\\         /\\ /\ /\\ /\\/\\    /\\/\\   /\/\\     /\\\ 
+  /\\     /\\   /\\  /\   /\\/\        /\\         /\ /\    /\\\\ /\\  /\\ /\\   /\\ /\\     /\\
+    /\\\\        /\\ /\\  /\\  /\\\\  /\\\         /\\        /\\   /\\   /\\\   /\\  /\\/\\ /\\</pre>
+					<h2>Other Works.</h2>
+					<section>
+						<article>
+							<h3>Perfume Global Site</h3>
+							<p>Server Side Programming</p>
+						</article>
+						<article>
+							<h3>NIKE RUN TRACK</h3>
+							<p>Audio Programming</p>
+						</article>
+						<article>
+							<h3>Intel Technology Night & Day in AKIBA 2013</h3>
+							<p>System Programming</p>
+							<p><a href="https://www.youtube.com/watch?v=0_TpjmuB71A" target="_blank"></a></p>
+						</article>
+						<article>
+							<h3>Perfume Music Player</h3>
+							<p>iOS Programming, Technical Direction</p>
+							<p><a href="https://itunes.apple.com/jp/app/perfume-music-player/id757724960?mt=8" target="_blank">App Store</a></p>
+						</article>
+					</section>
+				</article>
+				<article>
+<pre>88      a8P   88  88  88  88                               888888888888  88                                  
+88    ,88'    ""  88  88  ""                                    88       ""                                  
+88  ,88"          88  88                                        88                                           
+88,d88'       88  88  88  88  8b,dPPYba,    ,adPPYb,d8          88       88  88,dPYba,,adPYba,    ,adPPYba,  
+8888"88,      88  88  88  88  88P'   `"8a  a8"    `Y88          88       88  88P'   "88"    "8a  a8P_____88  
+88P   Y8b     88  88  88  88  88       88  8b       88          88       88  88      88      88  8PP"""""""  
+88     "88,   88  88  88  88  88       88  "8a,   ,d88          88       88  88      88      88  "8b,   ,aa  
+88       Y8b  88  88  88  88  88       88   `"YbbdP"Y8          88       88  88      88      88   `"Ybbd8"'  
+                                            aa,    ,88                                                       
+                                             "Y8bbdP"                                                        </pre>
+					<h2>Killing Time.</h2>
+					<section>
+						<article>
+							<h3>想ひ出ブレイカー</h3>
+							<p>Concept / Programming</p>
+							<p><a href="https://itunes.apple.com/jp/app/OmohideBreaker/id662738244?mt=8" target="_blank">App Store</a></p>
+						</article>
+						<article>
+							<h3>Anti Tagging</h3>
+							<p>Concept / Programming</p>
+							<p>Design : NAGAI Sou</p>
+							<p><a href="https://itunes.apple.com/jp/app/AntiTagging/id870291131?mt=8" target="_blank">App Store</a></p>
+						</article>
+						<article>
+							<h3>434bit</h3>
+							<p>with SHIMIZU Motoi</p>
+							<p><a href="http://434bit.asia" target="_blank">Web Site</a></p>
+						</article>
+						<article>
+							<h3>FUMAJIME</h3>
+							<p>with NAGAI Saw</p>
+							<p><a href="http://fumajime.net" target="_blank">Web Site</a></p>
+						</article>
+					</section>
+				</article>
+			</section>
+		</article>
+	</section>
+<!--	<script>
+		var scene, camera, renderer;
+		var geometry, material, mesh;
+
+		init();
+		animate();
+
+		var lines ;
+		var k = 0;
+		function init() {
+			lines = [];
+			for(var i = 0; i < 40; i++) {
+				lines.push(0);
+			}
+
+			scene = new THREE.Scene();
+			
+			camera = new THREE.OrthographicCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+			camera.position.z = 1000;
+
+//			geometry = new THREE.BoxGeometry( 200, 200, 200 );
+//			material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+//			mesh = new THREE.Mesh( geometry, material );
+			
+//			scene.add(mesh);
+
+			renderer = new THREE.CanvasRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+
+			document.body.appendChild(renderer.domElement);
+		}
+
+		function animate() {
+			// note: three.js includes requestAnimationFrame shim
+			requestAnimationFrame( animate );
+
+			// mesh.rotation.x += 0.01;
+			// mesh.rotation.y += 0.02;
+
+			var material = new THREE.LineBasicMaterial({
+				color: 0x000f8f,
+				linewidth: 2
+			});
+
+			for(var i = 0; i < 40; i++) {
+				var geometry = new THREE.Geometry();
+				for(var j = 0; j < 40; j++) {
+					var p = (i + 3 * k) / 40 * 6.28;
+					var q = (j + 5 * k) / 40 * 6.28;
+					geometry.vertices.push(new THREE.Vector3(
+						Math.cos(p) * window.innerWidth * 0.8 + (Math.random() - 0.5) * 20,
+						Math.sin(p) * Math.sin(q) * window.innerHeight * 0.8 + (Math.random() - 0.5) * 20,
+						Math.sin(p) * Math.cos(q) * window.innerHeight * 0.8 + (Math.random() - 0.5) * 20
+					));
+				}
+				if(lines[i]) scene.remove(lines[i]);
+				lines[i] = new THREE.Line( geometry, material );
+				scene.add( lines[i] );
+			}
+
+			renderer.render( scene, camera );
+			k++;
+		}
+	</script>-->
+	<!--<script>
+const arr = [];
+for(var key in document.all) if(document.all[key]) arr.push(document.all[key]);
+Array.prototype.concat.apply(
+  [],
+  arr.filter(e => (e.tagName != "pre")).map(e => e.childNodes ? [... e.childNodes] : [])
+)
+.filter(e => (e.tagName != "pre"))
+.filter(n => n.nodeType === Node.TEXT_NODE)
+.map(n =>
+  n.textContent = n.textContent.replace(/([a-zA-Z])/g, (_, c) =>
+    c + [...Array(Math.ceil(Math.random()*10))].map(() =>
+      String.fromCharCode(0x300 + Math.floor(Math.random()*79))
+    )
+    .join('')
+  )
+)
+	</script>-->
+</body>
+</html>
